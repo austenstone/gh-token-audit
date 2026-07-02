@@ -1,6 +1,10 @@
 # gh-token-audit
 
+[![Demo audit](https://github.com/austenstone/gh-token-audit/actions/workflows/demo.yml/badge.svg)](https://github.com/austenstone/gh-token-audit/actions/workflows/demo.yml)
+
 Statically audit `GITHUB_TOKEN` permissions across a repo, org, or entire Enterprise, and find the workflows that will **break** when you flip the default token permission from read/write to **read-only**.
+
+> 👀 **See it run:** the [Demo audit workflow](https://github.com/austenstone/gh-token-audit/actions/workflows/demo.yml) runs this Action against a sample repo on every push. Open the latest run's **job summary** for a live report.
 
 ## Why
 
