@@ -1,0 +1,28 @@
+name: Demo audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "dist/**"
+      - "action.yml"
+      - ".github/workflows/demo.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  demo:
+    name: Audit a sample repo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Run gh-token-audit
+        uses: ./
+        with:
+          repo: austenstone/actions-playground
+          fail-on: none
