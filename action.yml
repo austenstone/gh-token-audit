@@ -1,0 +1,48 @@
+name: "GITHUB_TOKEN Permissions Audit"
+description: "Statically find workflows that break when the default GITHUB_TOKEN permission is set to read-only."
+author: "austenstone"
+branding:
+  icon: "shield"
+  color: "yellow"
+inputs:
+  token:
+    description: "Token with repo + org/enterprise read access."
+    required: false
+    default: ${{ github.token }}
+  enterprise:
+    description: "Enterprise slug (audits all orgs)."
+    required: false
+  org:
+    description: "Organization(s), whitespace/comma separated."
+    required: false
+  repo:
+    description: "Specific repo(s) owner/name, whitespace/comma separated. Defaults to the current repo."
+    required: false
+  include-archived:
+    description: "Include archived repos."
+    required: false
+    default: "false"
+  max-repos:
+    description: "Cap the number of repos scanned."
+    required: false
+  api-url:
+    description: "GitHub API base URL (for GHES)."
+    required: false
+  fail-on:
+    description: "Fail the run on: none | breaks | review."
+    required: false
+    default: "none"
+outputs:
+  breaks:
+    description: "Count of jobs that would break on a read-only default."
+  review:
+    description: "Count of jobs needing manual review."
+  safe:
+    description: "Count of read-only jobs with no permissions block."
+  explicit:
+    description: "Count of jobs with an explicit permissions block."
+  json:
+    description: "Full report as JSON."
+runs:
+  using: "node20"
+  main: "dist/action.mjs"
